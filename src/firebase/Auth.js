@@ -60,7 +60,7 @@ function useProviderAuth() {
     return () => unsubscribe();
   });
 
-  return { signIn, signUp, singOut: signOutUser, user };
+  return { signIn, signUp, signOut: signOutUser, user };
 }
 
 export default AuthProvider;
