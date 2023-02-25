@@ -2,7 +2,6 @@
   "name": "calendar_application",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://rsumeeth.github.io/calendar_application",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
