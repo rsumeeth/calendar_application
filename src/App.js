@@ -14,11 +14,11 @@ import AuthProvider from "./firebase/Auth";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<Layout />}>
+      <Route path="/dashboard" element={<Layout />}>
         <Route index element={<Dashboard />} />
       </Route>
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/register" element={<Signup />} />
     </>
   )
 );

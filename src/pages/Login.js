@@ -15,7 +15,7 @@ export default function Login() {
     event.preventDefault();
     const { email, password } = event.target;
     await signIn(email.value, password.value);
-    navigate("/");
+    navigate("/dashboard");
   }
   return (
     <Box textAlign="center" sx={{ marginTop: "50px" }}>

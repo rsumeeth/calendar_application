@@ -16,7 +16,7 @@ export default function Signup() {
     event.preventDefault();
     const data = new FormData(event.currentTarget); //another way of getting the form data using inbult javascript method called formdata. we should be using new because it is an object
     await signUp(data.get("email"), data.get("name"), data.get("password"));
-    navigate("/login");
+    navigate("/");
   }
   return (
     <Box textAlign="center" sx={{ marginTop: "50px" }}>

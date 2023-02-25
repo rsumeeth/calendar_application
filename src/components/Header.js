@@ -9,7 +9,7 @@ export default function Header() {
 
   async function logout() {
     await signOut();
-    navigate("/login");
+    navigate("/");
   }
   return (
     <>
