@@ -15,7 +15,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Login />} />
-      <Route path="/dashboard" element={<Layout />}>
+      <Route path="dashboard" element={<Layout />}>
         <Route index element={<Dashboard />} />
       </Route>
       <Route path="/register" element={<Signup />} />
