@@ -1,22 +1,35 @@
 import "./App.css";
 import React from "react";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import AuthProvider from "./firebase/Auth";
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/" element={<Login />} />
+      <Route path="dashboard" element={<Layout />}>
+        <Route index element={<Dashboard />} />
+      </Route>
+      <Route path="register" element={<Signup />} />
+    </>
+  ),
+  {
+    basename: "/calendar_application",
+  }
+);
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Route exact path="/" component={Login} />
-        <Route path="/register" component={Signup} />
-        <Route path="/dashboard" component={Layout}>
-          <Route exact path="/dashboard" component={Dashboard} />
-        </Route>
-      </Router>
+      <RouterProvider router={router} />
     </AuthProvider>
   );
 }
