@@ -50,6 +50,14 @@ export default function Login() {
           </Button>
         </Stack>
       </form>
+      <Button
+        href="register"
+        sx={{ marginTop: "15px", width: "350px" }}
+        type="submit"
+        variant="contained"
+      >
+        Signup
+      </Button>
     </Box>
   );
 }
