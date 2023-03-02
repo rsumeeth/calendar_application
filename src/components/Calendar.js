@@ -30,7 +30,6 @@ export default function Calendar() {
   });
 
   const prefixNoOfDays = daysArray.indexOf(format(startDayOfMonth, "E"));
-  // const suffixNoOfDays = daysArray.indexOf(format(endDayOfMonth, "E"));
   const suffixNoOfDays = 42 - prefixNoOfDays - getDaysInMonth(currentMonth);
 
   console.log(suffixNoOfDays);
@@ -65,13 +64,30 @@ export default function Calendar() {
         sx={{
           display: "flex",
           marginTop: "15px",
+          alignItems: "center",
         }}
       >
         <Button onClick={() => subractOneMonth()}>
           <KeyboardDoubleArrowLeftIcon />
         </Button>
-        <Typography sx={{ margin: "5px " }} variant="h5" component="h2">
-          {format(currentMonth, "MMM yyyy")}
+        <Typography
+          sx={{ alignItems: "center", fontWeight: "600" }}
+          variant="h5"
+          component="h2"
+        >
+          {format(currentMonth, "MMMM ")}
+        </Typography>
+        <Typography
+          sx={{
+            alignItems: "center",
+            fontWeight: "100",
+            margin: "5px",
+            fontSize: "22px",
+          }}
+          variant="p"
+          component="p"
+        >
+          {format(currentMonth, "yyyy")}
         </Typography>
         <Button onClick={() => addOneMonth()}>
           <KeyboardDoubleArrowRightIcon />
@@ -79,9 +95,8 @@ export default function Calendar() {
       </Box>
       <Box
         sx={{
-          //list of days in a week : "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
           margin: "15px",
-          border: "2px solid lightblue",
+
           display: "grid",
           gridTemplateColumns: "repeat(7,minmax(70px, auto))",
           gridTemplateRows: "minmax(70px, auto)",
@@ -91,7 +106,7 @@ export default function Calendar() {
       >
         {daysArray?.map((item, index) => {
           return (
-            <div key={item} style={{ border: "1px solid blue" }}>
+            <div key={item} style={{}}>
               {item}
             </div>
           );
@@ -101,9 +116,8 @@ export default function Calendar() {
         sx={{
           margin: "15px",
           display: "grid",
-          border: "2px solid lightblue",
+          border: "1px solid #f7f7f7",
           gridTemplateColumns: "repeat(7, auto)",
-          // gridTemplateColumns: "repeat(7, auto)",
           gridTemplateRows: "repeat(6,minmax(70px, auto))",
           gap: "10px",
         }}
@@ -113,7 +127,10 @@ export default function Calendar() {
             return (
               <Box
                 key={item}
-                style={{ border: "1px solid blue", color: "grey" }}
+                style={{
+                  border: "1px solid #f7f7f7",
+                  color: "grey",
+                }}
               >
                 {format(item, "dd")}
               </Box>
@@ -121,14 +138,28 @@ export default function Calendar() {
           })}
         {daysInterval?.map((item, index) => {
           return (
-            <Box key={item} style={{ border: "1px solid blue" }}>
+            <Box
+              key={item}
+              sx={{
+                border: "1px solid #f7f7f7",
+                "&:hover": {
+                  backgroundColor: "#f7f7f7",
+                },
+              }}
+            >
               {format(item, "dd")}
             </Box>
           );
         })}
         {suffixDays?.map((item, index) => {
           return (
-            <Box key={item} style={{ border: "1px solid blue", color: "grey" }}>
+            <Box
+              key={item}
+              style={{
+                border: "1px solid #f7f7f7",
+                color: "grey",
+              }}
+            >
               {format(item, "dd")}
             </Box>
           );
