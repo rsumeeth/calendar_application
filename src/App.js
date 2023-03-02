@@ -18,9 +18,12 @@ const router = createBrowserRouter(
       <Route path="dashboard" element={<Layout />}>
         <Route index element={<Dashboard />} />
       </Route>
-      <Route path="/register" element={<Signup />} />
+      <Route path="register" element={<Signup />} />
     </>
-  )
+  ),
+  {
+    basename: "/calendar_application",
+  }
 );
 
 function App() {
