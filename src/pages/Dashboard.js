@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import Calendar from "../components/Calendar";
+import Todo from "../components/Todo";
 
 export default function Dashboard() {
   return (
@@ -10,7 +11,7 @@ export default function Dashboard() {
           <Calendar />
         </Grid>
         <Grid item xs={2}>
-          todo
+          <Todo />
         </Grid>
       </Grid>
     </div>

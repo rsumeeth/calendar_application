@@ -13,9 +13,9 @@ export default function Header() {
   }
   return (
     <>
-      <AppBar position="sticky ">
+      <AppBar position="sticky">
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography>Dashboard Calendar App</Typography>{" "}
+          <Typography>Dashboard Calendar App</Typography>
           {user ? (
             <div style={{ textAlign: "center", padding: "10px" }}>
               <Typography>Welcome, {user.displayName ?? user.email}</Typography>
