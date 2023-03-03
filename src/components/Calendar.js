@@ -107,6 +107,9 @@ export default function Calendar() {
                 "&:hover": {
                   backgroundColor: "#f7f7f7",
                 },
+                "&::selection": {
+                  backgroundColor: "lightblue",
+                },
               }}
             >
               {format(item, "dd")}

@@ -183,8 +183,7 @@ const Todo = () => {
                           handleSaveItem={handleSaveItem}
                         />
                       </Stack>
-                    ) : item.dateAsKey === getUnixTime(selectedDateRedux) &&
-                      item ? (
+                    ) : item.dateAsKey === getUnixTime(selectedDateRedux) ? (
                       <>
                         <ListItemText
                           sx={{ wordWrap: "break-word" }}
