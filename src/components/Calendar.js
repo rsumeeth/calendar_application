@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box } from "@mui/system";
 import {
   eachDayOfInterval,
@@ -6,23 +6,33 @@ import {
   subDays,
   startOfMonth,
   lastDayOfMonth,
-  sub,
   add,
   addDays,
   getDaysInMonth,
 } from "date-fns";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addOneMonthRedux,
+  subractOneMonthRedux,
+} from "../redux/yearMonthDaySlice";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import getUnixTime from "date-fns/getUnixTime";
+import fromUnixTime from "date-fns/fromUnixTime";
 
 export default function Calendar() {
-  const date = new Date();
-  const [currentMonth, setcurrentMonth] = useState(date);
+  const currentMonthR = fromUnixTime(
+    useSelector((state) => state.yearMonthDay.value.currentMonthRedux)
+  );
   const daysArray = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  const startDayOfMonth = startOfMonth(currentMonth);
-  const endDayOfMonth = lastDayOfMonth(currentMonth);
+  const startDayOfMonth = startOfMonth(currentMonthR);
+  const endDayOfMonth = lastDayOfMonth(currentMonthR);
+
+  const dispatch = useDispatch();
+  console.log(currentMonthR);
 
   const daysInterval = eachDayOfInterval({
     start: startDayOfMonth,
@@ -30,32 +40,26 @@ export default function Calendar() {
   });
 
   const prefixNoOfDays = daysArray.indexOf(format(startDayOfMonth, "E"));
-  const suffixNoOfDays = 42 - prefixNoOfDays - getDaysInMonth(currentMonth);
-
-  console.log(suffixNoOfDays);
+  const suffixNoOfDays = 42 - prefixNoOfDays - getDaysInMonth(currentMonthR);
 
   const prefixDays = eachDayOfInterval({
-    start: subDays(startOfMonth(currentMonth), prefixNoOfDays),
+    start: subDays(startOfMonth(currentMonthR), prefixNoOfDays),
     end: lastDayOfMonth(subDays(startDayOfMonth, prefixNoOfDays)),
   });
 
   const suffixDays = eachDayOfInterval({
-    start: startOfMonth(add(currentMonth, { months: 1 })),
+    start: startOfMonth(add(currentMonthR, { months: 1 })),
     end:
-      addDays(startOfMonth(add(currentMonth, { months: 1 })), suffixNoOfDays) -
+      addDays(startOfMonth(add(currentMonthR, { months: 1 })), suffixNoOfDays) -
       1, // didn't get the logic here but worked lol
   });
 
   function subractOneMonth() {
-    const su = sub(currentMonth, { months: 1 });
-    setcurrentMonth(su);
+    dispatch(subractOneMonthRedux(getUnixTime(currentMonthR)));
   }
 
   function addOneMonth() {
-    const ad = add(currentMonth, {
-      months: 1,
-    });
-    setcurrentMonth(ad);
+    dispatch(addOneMonthRedux(getUnixTime(currentMonthR)));
   }
 
   return (
@@ -70,25 +74,34 @@ export default function Calendar() {
         <Button onClick={() => subractOneMonth()}>
           <KeyboardDoubleArrowLeftIcon />
         </Button>
-        <Typography
-          sx={{ alignItems: "center", fontWeight: "600" }}
-          variant="h5"
-          component="h2"
-        >
-          {format(currentMonth, "MMMM ")}
-        </Typography>
-        <Typography
+        <Box
           sx={{
+            display: "flex",
             alignItems: "center",
-            fontWeight: "100",
-            margin: "5px",
-            fontSize: "22px",
+            minWidth: "170px",
+            justifyContent: "center",
           }}
-          variant="p"
-          component="p"
         >
-          {format(currentMonth, "yyyy")}
-        </Typography>
+          <Typography
+            sx={{ alignItems: "center", fontWeight: "600" }}
+            variant="h5"
+            component="h2"
+          >
+            {format(currentMonthR, "MMMM ")}
+          </Typography>
+          <Typography
+            sx={{
+              alignItems: "center",
+              fontWeight: "100",
+              margin: "5px",
+              fontSize: "22px",
+            }}
+            variant="p"
+            component="p"
+          >
+            {format(currentMonthR, "yyyy")}
+          </Typography>
+        </Box>
         <Button onClick={() => addOneMonth()}>
           <KeyboardDoubleArrowRightIcon />
         </Button>
@@ -116,7 +129,7 @@ export default function Calendar() {
         sx={{
           margin: "15px",
           display: "grid",
-          border: "1px solid #f7f7f7",
+
           gridTemplateColumns: "repeat(7, auto)",
           gridTemplateRows: "repeat(6,minmax(70px, auto))",
           gap: "10px",
@@ -129,6 +142,7 @@ export default function Calendar() {
                 key={item}
                 style={{
                   border: "1px solid #f7f7f7",
+                  backgroundColor: "#f7f7f7",
                   color: "grey",
                 }}
               >
@@ -158,6 +172,7 @@ export default function Calendar() {
               style={{
                 border: "1px solid #f7f7f7",
                 color: "grey",
+                backgroundColor: "#f7f7f7",
               }}
             >
               {format(item, "dd")}
