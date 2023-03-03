@@ -29,10 +29,9 @@ const Todo = () => {
     useSelector((state) => state.yearMonthDay.value.currentSelectedDateRedux)
   );
 
-  // const currentMonthR = fromUnixTime(
-  //   useSelector((state) => state.yearMonthDay.value.currentMonthRedux)
-  // );
-  console.log(selectedDateRedux);
+  const itemListKey = useSelector((state) => state.items.value);
+
+  console.log(itemListKey);
 
   const itemsLength = itemsTodo.length;
 
@@ -46,13 +45,14 @@ const Todo = () => {
     setsearch(searchValue);
   };
 
-  function handleAddItem(search, itemsLength) {
+  function handleAddItem(search, itemsLength, selectedDateRedux) {
     dispatch(
       addItem({
         value: search,
         id: itemsLength.toString(),
         editedStatus: false,
         time: value + " " + valueTime,
+        dateAsKey: getUnixTime(selectedDateRedux),
       })
     );
   }
@@ -137,7 +137,9 @@ const Todo = () => {
           <Button
             size="medium"
             variant="contained"
-            onClick={() => handleAddItem(search, itemsLength)}
+            onClick={() =>
+              handleAddItem(search, itemsLength, selectedDateRedux)
+            }
           >
             Add
           </Button>
@@ -161,7 +163,8 @@ const Todo = () => {
           >
             {itemsTodo?.map(
               (item, index) =>
-                item && (
+                item &&
+                item.dateAsKey === getUnixTime(selectedDateRedux) && (
                   <ListItem key={index} style={{}}>
                     {item.editedStatus && item.indexEditValue === index ? (
                       <Stack
@@ -180,7 +183,8 @@ const Todo = () => {
                           handleSaveItem={handleSaveItem}
                         />
                       </Stack>
-                    ) : (
+                    ) : item.dateAsKey === getUnixTime(selectedDateRedux) &&
+                      item ? (
                       <>
                         <ListItemText
                           sx={{ wordWrap: "break-word" }}
@@ -207,6 +211,8 @@ const Todo = () => {
                           index={index}
                         />
                       </>
+                    ) : (
+                      <p>No items</p>
                     )}
                   </ListItem>
                 )
