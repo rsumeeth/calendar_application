@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/calendar_application/static/css/main.a2a15777.css",
-    "main.js": "/calendar_application/static/js/main.2bf35ce9.js",
+    "main.css": "/calendar_application/static/css/main.085323e5.css",
+    "main.js": "/calendar_application/static/js/main.b7e82e98.js",
     "static/media/roboto-all-500-normal.woff": "/calendar_application/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
     "static/media/roboto-all-900-normal.woff": "/calendar_application/static/media/roboto-all-900-normal.9b6b73f9f3a35bfba27f.woff",
     "static/media/roboto-all-700-normal.woff": "/calendar_application/static/media/roboto-all-700-normal.a457fde362a540fcadff.woff",
@@ -63,11 +63,11 @@
     "static/media/plus-jakarta-sans-cyrillic-ext-700-normal.woff2": "/calendar_application/static/media/plus-jakarta-sans-cyrillic-ext-700-normal.fb66026fab3f0f8fa4a2.woff2",
     "static/media/plus-jakarta-sans-cyrillic-ext-400-normal.woff2": "/calendar_application/static/media/plus-jakarta-sans-cyrillic-ext-400-normal.a6dba74d1bf523fa5a5e.woff2",
     "index.html": "/calendar_application/index.html",
-    "main.a2a15777.css.map": "/calendar_application/static/css/main.a2a15777.css.map",
-    "main.2bf35ce9.js.map": "/calendar_application/static/js/main.2bf35ce9.js.map"
+    "main.085323e5.css.map": "/calendar_application/static/css/main.085323e5.css.map",
+    "main.b7e82e98.js.map": "/calendar_application/static/js/main.b7e82e98.js.map"
   },
   "entrypoints": [
-    "static/css/main.a2a15777.css",
-    "static/js/main.2bf35ce9.js"
+    "static/css/main.085323e5.css",
+    "static/js/main.b7e82e98.js"
   ]
 }
