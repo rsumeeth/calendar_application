@@ -11,16 +11,9 @@ import {
   getDaysInMonth,
 } from "date-fns";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addOneMonthRedux,
-  subractOneMonthRedux,
-} from "../redux/yearMonthDaySlice";
-import { Typography } from "@mui/material";
-import Button from "@mui/material/Button";
-import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import getUnixTime from "date-fns/getUnixTime";
 import fromUnixTime from "date-fns/fromUnixTime";
+import getUnixTime from "date-fns/getUnixTime";
+import { selectedDateRedux } from "../redux/yearMonthDaySlice";
 
 export default function Calendar() {
   const currentMonthR = fromUnixTime(
@@ -32,7 +25,7 @@ export default function Calendar() {
   const endDayOfMonth = lastDayOfMonth(currentMonthR);
 
   const dispatch = useDispatch();
-  console.log(currentMonthR);
+  // console.log(currentMonthR);
 
   const daysInterval = eachDayOfInterval({
     start: startDayOfMonth,
@@ -54,62 +47,16 @@ export default function Calendar() {
       1, // didn't get the logic here but worked lol
   });
 
-  function subractOneMonth() {
-    dispatch(subractOneMonthRedux(getUnixTime(currentMonthR)));
-  }
-
-  function addOneMonth() {
-    dispatch(addOneMonthRedux(getUnixTime(currentMonthR)));
+  function handleSelectDate(item) {
+    dispatch(selectedDateRedux(getUnixTime(item)));
   }
 
   return (
     <div>
       <Box
         sx={{
-          display: "flex",
-          marginTop: "15px",
-          alignItems: "center",
-        }}
-      >
-        <Button onClick={() => subractOneMonth()}>
-          <KeyboardDoubleArrowLeftIcon />
-        </Button>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            minWidth: "170px",
-            justifyContent: "center",
-          }}
-        >
-          <Typography
-            sx={{ alignItems: "center", fontWeight: "600" }}
-            variant="h5"
-            component="h2"
-          >
-            {format(currentMonthR, "MMMM ")}
-          </Typography>
-          <Typography
-            sx={{
-              alignItems: "center",
-              fontWeight: "100",
-              margin: "5px",
-              fontSize: "22px",
-            }}
-            variant="p"
-            component="p"
-          >
-            {format(currentMonthR, "yyyy")}
-          </Typography>
-        </Box>
-        <Button onClick={() => addOneMonth()}>
-          <KeyboardDoubleArrowRightIcon />
-        </Button>
-      </Box>
-      <Box
-        sx={{
-          margin: "15px",
-
+          margin: "45px 15px 15px 15px",
+          border: "1px solid #f7f7f7",
           display: "grid",
           gridTemplateColumns: "repeat(7,minmax(70px, auto))",
           gridTemplateRows: "minmax(70px, auto)",
@@ -153,6 +100,7 @@ export default function Calendar() {
         {daysInterval?.map((item, index) => {
           return (
             <Box
+              onClick={() => handleSelectDate(item)}
               key={item}
               sx={{
                 border: "1px solid #f7f7f7",

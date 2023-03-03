@@ -1,0 +1,6 @@
+.todo {
+  background: #007fff;
+  background: linear-gradient(to right, #007fff 40%, #0059b2 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

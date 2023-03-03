@@ -4,11 +4,12 @@ import getUnixTime from "date-fns/getUnixTime";
 import fromUnixTime from "date-fns/fromUnixTime";
 
 const currentMonthRedux = getUnixTime(new Date());
+const currentSelectedDateRedux = getUnixTime(new Date());
 
 export const yearMonthDaySlice = createSlice({
   name: "yearMonthDay",
   initialState: {
-    value: { currentMonthRedux },
+    value: { currentMonthRedux, currentSelectedDateRedux },
   },
   reducers: {
     addOneMonthRedux(state, action) {
@@ -22,9 +23,12 @@ export const yearMonthDaySlice = createSlice({
         sub(fromUnixTime(action.payload), { months: 1 })
       );
     },
+    selectedDateRedux(state, action) {
+      state.value.currentSelectedDateRedux = action.payload;
+    },
   },
 });
 
-export const { addOneMonthRedux, subractOneMonthRedux } =
+export const { addOneMonthRedux, subractOneMonthRedux, selectedDateRedux } =
   yearMonthDaySlice.actions;
 export default yearMonthDaySlice.reducer;
